@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson_02", "Lesson_02", "{5DF2B319-253B-4F9E-A2D6-10DD4A73E3A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_01", "Task_01\Task_01.csproj", "{D3159953-746C-44CB-B6D4-6944324A01B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_02_01", "Task_01\Task_02_01.csproj", "{D3159953-746C-44CB-B6D4-6944324A01B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
