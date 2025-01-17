@@ -2,38 +2,27 @@
 {
     internal class Program
     {
-        /*пользователь вводит два действительных числа.
-         * программа должна подсчитать сумму, произведение,
-         * разность и деление этих числе и вывести результат 
-         * в консоль.
-         */
+       /*Найти значение выражения 
+        * при a = 0, b = 6, c = 2
+        * 
+        */
         static void Main(string[] args)
         {
-            //ввод данных
-            Console.WriteLine("введите первое число (a)");
-            double a = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("введите второе число (b)");
-            double b = Convert.ToDouble(Console.ReadLine());
+            double a = Math.PI;
+            double b = 6;
+            double c = 2;
 
-            //вычисление и вывод результата
-            double summAB = a + b;
-            Console.WriteLine("сумма чисел: " + summAB);
+            double part1 = 5 * Math.Atan(a);
+            double part2 = 0.25 * Math.Cos(a);
+            double part3 = a + 3 * Math.Abs(a - b) + a * a;
+            double part4 = Math.Abs(a - b) * c + Math.Pow(a, 2);
 
-            double multipleAB = a * b;
-            Console.WriteLine("произведение чисел: " + multipleAB);
-            double diffAB = a - b;
-            Console.WriteLine("разность чисел: " + diffAB);
-            double divAB;
-            if (b != 0)
-            {
-                divAB = a / b;
-                Console.WriteLine("деление a на b: " + divAB);
-            }
-            else
-            {
-                Console.WriteLine("деление на ноль");
-            }
-        }
+            double result = part1 - part2 * (part3 / part4);
+            Console.WriteLine(Math.Round(result,2));
+
+            Console.WriteLine(Math.E);
+           
+        } 
     }
 }
 
