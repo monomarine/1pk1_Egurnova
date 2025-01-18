@@ -31,28 +31,23 @@
                     "\t 5 - проверить данные");
 
                 //переменная для считывания выбранного режима работы
-                string? mode = Console.ReadLine();
+                string mode = Console.ReadLine();
 
                 switch (mode)
                 {
                     case "1": //ветка регистрации пользователя
 
                         Console.WriteLine("введите логин нового пользователя");
-                        string? tempLogin = Console.ReadLine();  //временная переменная для нового логина
-                                                                 //проверка - если пользователь ввел не тот же самый логин и не пустой
-                        login = tempLogin; //перезапись логина
-                        
+                        login = Console.ReadLine();  //временная переменная для нового логина
                         Console.WriteLine("введите пароль нового пользователя");
-                        string? tempPass = Console.ReadLine();  //временная переменная для нового логина
-                                                                //проверка - если пользователь ввел не тот же самый пароль и не пустой
-                        password = tempPass; //перезапись пароля
+                        password = Console.ReadLine();  //временная переменная для нового логина
                         break;
 
                     case "2": // смена логина
                         if (login != null)
                             Console.WriteLine("ваш текущий логин - " + login +
                                 "\nвведите новый логин");
-                        tempLogin = Console.ReadLine();
+                        string tempLogin = Console.ReadLine();
                         if (tempLogin != login && tempLogin != null)
                             login = tempLogin;
                         else
@@ -63,8 +58,8 @@
                         if (password != null)
                             Console.WriteLine("ваш текущий пароль - " + password +
                                 "\nвведите новый пароль");
-                        tempPass = Console.ReadLine();
-                        if (tempPass != login && tempPass != null)
+                        string tempPass = Console.ReadLine();
+                        if (tempPass != password && tempPass != null)
                             password = tempPass;
                         else
                             Console.WriteLine("введен некорректный пароль");
