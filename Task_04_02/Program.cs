@@ -21,7 +21,7 @@
             //заполнение массива значениями по условию
             while(i != n)
             {
-                int temp = random.Next(-10, 11);
+                int temp = random.Next(-99, 100);
                 if (temp == 0)
                     continue;
                 numbers[i] = temp;
@@ -39,6 +39,7 @@
             for (int index = 0; index < countOfNegative; index++)
             {
                 negative[index] = numbers[index];
+                Console.Write(negative[index]+ " ");
             }
 
             Console.WriteLine("\nмассив с положительными значениями:");
