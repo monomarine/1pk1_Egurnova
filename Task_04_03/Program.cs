@@ -29,7 +29,7 @@
             for (int i = 0; i < marks.Length; i++)
                 counts[marks[i]]++;
             int max_count_index = 0;
-            for (int i = 0;i < counts.Length; i++)
+            for (int i = 0; i < counts.Length; i++)
             {
                 if (counts[i] > counts[max_count_index])
                     max_count_index = i;
@@ -38,4 +38,5 @@
 
             Console.WriteLine("Кол-во двоек: " + counts[2]);
         }
+    }
 }
