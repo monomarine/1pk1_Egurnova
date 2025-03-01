@@ -15,7 +15,7 @@
                 Console.WriteLine("введите число n - до которого требуется вычислить сумму всех факториалов");
                 int n = Convert.ToInt32(Console.ReadLine());
 
-                long fact = 0;
+                ulong fact = 0;
                 while (n > 0)
                 {
                     fact += Factorial(n);
@@ -23,8 +23,9 @@
                 }
 
 
-                Console.WriteLine($"сумма факториалов до n = {fact}");
-                Console.WriteLine($"максимальное long знач = {long.MaxValue}");
+                Console.WriteLine($"сумма факториалов до  n = {fact}");
+                Console.WriteLine($"максимальное ulong знач = {ulong.MaxValue}");
+                Console.WriteLine($"максимальное ulong знач = {ulong.MinValue}");
 
                 Console.ReadKey();
             }
@@ -34,12 +35,12 @@
         /// </summary>
         /// <param name="k">число факториала</param>
         /// <returns>факториал</returns>
-        public static long Factorial(int k)
+        public static ulong Factorial(int k)
         {
-            long result = 1;
+            ulong result = 1;
             while(k > 0)
             {
-                result *= k;
+                result *= (ulong)k;
                 k--;
             }
             return result;

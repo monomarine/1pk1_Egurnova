@@ -6,8 +6,8 @@
 
         static void Main(string[] args)
         {
-            int[] data = GetGeneratedArray(10);
-            PrintArray(data, '*');
+            int[] data = GetGeneratedArray(20);
+            PrintArray(data, '-');
 
             int maxValue = GetMaxValueInArray(data);
 
