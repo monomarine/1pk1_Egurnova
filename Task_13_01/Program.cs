@@ -15,8 +15,7 @@
             st.Name = "Петр";
             st.Surname = "Иванов";
             st.Patronomyc = null;
-            st.Birthday = DateTime.Now
-                ;
+            st.Birthday = DateTime.Now;
 
             Console.WriteLine(st.GetInfo());
         }
