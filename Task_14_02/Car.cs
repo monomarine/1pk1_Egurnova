@@ -24,13 +24,13 @@ namespace Task_14_02
             {
                 if (CurrentSpeed >= MaxSpeed)
                 {
-                    Logger.Write($"{StateNomer} ПРЕВЫШЕНИЕ СКОРОСТИ!");
+                    Logger.Write($"{StateNomer} ПРЕВЫШЕНИЕ СКОРОСТИ!", MessageType.HIGHT);
                     break;
                 }
                 else
                 {
                     CurrentSpeed += delta;
-                    Logger.Write($"текущая скорость автомобиля{StateNomer} - {CurrentSpeed}");
+                    Logger.Write($"текущая скорость автомобиля{StateNomer} - {CurrentSpeed}", MessageType.LOW);
                 }
             }
         }

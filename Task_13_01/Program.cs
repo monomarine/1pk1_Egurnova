@@ -11,13 +11,17 @@
             //Student student2 = new Student("Сергей", "Петров", "Иванович", new DateTime(2005, 10, 05));
             //Console.WriteLine(student2.GetInfo());
 
-            Student st = new Student();
-            st.Name = "Петр";
-            st.Surname = "Иванов";
-            st.Patronomyc = null;
-            st.Birthday = DateTime.Now;
+            Student st = new Student
+            {
+                Name = "Петр",
+                Surname = "Иванов",
+                Patronomyc = "Сергеевич",
+                Birthday = new DateTime(2000, 01, 01)
+            };
 
-            Console.WriteLine(st.GetInfo());
+            Student st2 = new Student("Сергей", "Иванов", "Иванович", new DateTime(2005, 05, 20));
+            Console.WriteLine(st2.GetInfo());
+            Console.WriteLine(st2.FIO);
         }
     }
 }

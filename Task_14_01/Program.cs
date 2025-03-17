@@ -14,6 +14,7 @@
             Item i1 = new Item();
             Item i2 = new Item("ромашка");
             Item i3 = new Item(120, "sunflower");
+            Item i = new Item();
             Item.GetItemsCount();
 
             i3.Dispose();

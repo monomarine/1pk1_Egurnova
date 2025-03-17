@@ -64,6 +64,12 @@ namespace Task_13_01
                     Console.WriteLine("student is too yong");
             }
         }
+
+
+        public int Age => DateTime.Now.Year - birthday.Year;
+
+        public string FIO => surname + " "+ name + " " + patronomyc;
+        
         #endregion
 
         #region методы
@@ -74,7 +80,8 @@ namespace Task_13_01
         public string GetInfo()
         {
             return $"{surname} {name} {patronomyc}\n" +
-                $"дата рождения: {birthday.ToShortDateString()}";
+                $"дата рождения: {birthday.ToShortDateString()}\n" +
+                $"возраст: {Age}";
         }
         #endregion
 
@@ -88,11 +95,10 @@ namespace Task_13_01
         /// </summary>
         /// <param name="name">имя</param>
         /// <param name="surname">фамилия</param>
-        
         public Student(string name, string surname)
         {
-            this.name = name;
-            this.surname = surname;
+            Name = name;
+            Surname = surname;
         }
         /// <summary>
         /// конструктор создает объект студента с именем, фамилией и отчетством
@@ -103,9 +109,9 @@ namespace Task_13_01
         /// <param name="patronomyc">отчетсво</param>
         public Student(string name, string surname, string patronomyc)
         {
-            this.name = name;
-            this.surname = surname;
-            this.patronomyc = patronomyc;
+            Name = name;
+            Surname = surname;
+            Patronomyc = patronomyc;
         }
         /// <summary>
         /// полный конструктор, с помощью которого заполняются данными все поля
@@ -116,10 +122,10 @@ namespace Task_13_01
         /// <param name="bd">дата рождения</param>
         public Student(string name, string surname, string patronomyc, DateTime bd)
         {
-            this.name = name;
-            this.surname = surname;
-            this.patronomyc = patronomyc;
-            this.birthday = bd;
+            Name = name;
+            Surname = surname;
+            Patronomyc = patronomyc;
+            Birthday = bd;
         }
         /// <summary>
         /// конструтор по умолчанию, который становиться недоступным как только прописываются

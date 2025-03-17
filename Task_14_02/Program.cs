@@ -9,11 +9,15 @@
         */
         static void Main(string[] args)
         {
-            Car car = new Car("56 JFH 45", 10);
+            Car car = new Car("56 JFH 45", 0);
 
-            car.Drive(10);
+            car.Drive(20);
 
+            Console.WriteLine("вывод текущего журнала");
             Console.WriteLine(Logger.Read());
+
+            Console.WriteLine("\nвывод критического журнала");
+            Console.WriteLine(Logger.ReadCriticalLog());
         }
     }
 }
