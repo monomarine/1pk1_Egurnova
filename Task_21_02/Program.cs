@@ -12,7 +12,7 @@
 
             var countOfWords = GetCountOfWords(text);
 
-            foreach (var word in countOfWords) 
+            foreach (KeyValuePair<string, int> word in countOfWords) 
             {
                 Console.WriteLine($"слово \"{word.Key}\" встречается {word.Value} раз(а)");
             }
@@ -22,6 +22,7 @@
         {
             Dictionary<string, int> result = new();
 
+           // List<string> word2 = text.Split().ToList();
             string[] words = text.Split();
 
             foreach (string word in words)

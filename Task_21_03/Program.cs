@@ -12,14 +12,14 @@
         {
             List<Book> books = new List<Book>();
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var book = new Book();  
                 books.Add(book);
-               // book.PrintInfo();
+                book.PrintInfo();
             }
 
-            //поиск самой ранней и поздней книги по году издания
+           /*поиск самой ранней и поздней книги по году издания
             int minYear = int.MaxValue;
             int maxYear = int.MinValue;
             Book maxYearBook = new Book();
@@ -37,9 +37,11 @@
                     maxYearBook = book; 
                 }
             }
-
+            Console.WriteLine("\n\nкнига с минимальным годом издания");
             minYearBook.PrintInfo();
+            Console.WriteLine("\nкнига с максимальным годом издания");
             maxYearBook.PrintInfo();
+            */
 
             //вывод книг только в жанре фантастика:
 
@@ -57,6 +59,30 @@
                 if (book.Status == BookStatus.Issued)
                     book.PrintInfo();
             }
+
+            Console.WriteLine("самые старые книги:");
+            List<Book> mins = GetMinYearBooks(books);
+                foreach (var book in mins)
+                book.PrintInfo();
         }
+        // ДЗ. создать список для вывода всех самых новых книг (по году издания)
+        static List<Book> GetMinYearBooks(List<Book> books)
+        {
+            int minYear = 3000;
+            List<Book> minBooks = new(); //результирующий список
+
+            foreach (var book in books) 
+            {
+                if(book.Year < minYear)
+                    minYear = book.Year;
+            }
+            foreach (var book in books)
+            {
+                if(book.Year == minYear)
+                    minBooks.Add(book);
+            }
+            return minBooks;
+        }
+
     }
 }

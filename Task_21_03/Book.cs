@@ -29,12 +29,12 @@ namespace Task_21_03
 
         public void PrintInfo()
         {
-            string result = $"книга {Year} года издания. Жанр - {Genre}\n";
+            string description = $"книга {Year} года издания. Жанр - {Genre}\n";
             string status = Status == BookStatus.Available ?
                 "доступна для выдачи" :
                 "находится на руках у читателя";
 
-            Console.WriteLine(result + status);
+            Console.WriteLine(description + status);
         }
     }
 }

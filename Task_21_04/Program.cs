@@ -11,7 +11,7 @@
                 Console.Write(i + " ");
 
             Console.WriteLine();
-            var subSet = GetSubSet(ref set, 23, 57);
+            SortedSet<int> subSet = GetSubSet(ref set, 23, 57);
             foreach (int i in subSet)
                 Console.Write(i + " ");
         }
