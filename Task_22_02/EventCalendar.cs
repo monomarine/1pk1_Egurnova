@@ -3,31 +3,41 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Task_22_02
 {
-    /*
-         Создать класс EventCalendar, который хранит события (Dictionary<DateOnly, List<string>>).
+            /*класс EventCalendar, который хранит события (Dictionary<DateOnly, List<string>>).
             Методы:
             AddEvent(DateOnly, string) - добавить событие
             GetEventsForDay(DateOnly) - получить события на день
-            GetEventsForWeek(DateTime) - получить все события на неделю*/
+            GetEventsForWeek(DateTime) - получить все события на неделю */
     internal class EventCalendar
     {
-        private Dictionary<DateOnly, List<string>> events = new();
+        private Dictionary<DateOnly, List<string>> events = new(); //словарь со всеми событиями
 
+        /// <summary>
+        /// добавление события на конкретную дату
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="eventData"></param>
         public void AddEvent(DateOnly date, string eventData)
         {
-            if(!events.ContainsKey(date)) 
+            if(!events.ContainsKey(date)) //если ключ в словаре (нужная дата) не существует
             {
-                events[date] = new List<string>{eventData };  
+                events[date] = new List<string>{eventData };  //то по этому ключу создать новый список с записью eventData
             }
-            else
-                events[date].Add(eventData);
+            else //если ключ уже есть
+                events[date].Add(eventData); //то в список по этому ключу дописать новое событие
         }
 
+        /// <summary>
+        /// вывод всех событий на конкретный день
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public List<string> GetEventsForDay(DateOnly date) 
         { 
             if(!events.ContainsKey(date))
@@ -35,10 +45,14 @@ namespace Task_22_02
                 Console.WriteLine($"событий на дату {date} нет");
                 return null;
             }
-
+            //воврат списка событий по ключу date
             return events[date];
         }
 
+        /// <summary>
+        /// вывод на консоль событий на дату
+        /// </summary>
+        /// <param name="date"></param>
         public void PrintEventsForDay(DateOnly date)
         {
             List<string> result = GetEventsForDay(date);
@@ -51,64 +65,41 @@ namespace Task_22_02
             }
         }
 
-        public Dictionary<DateOnly, List<string>> GetEventsForWeek()//не работает
+        /// <summary>
+        /// получение списка всех событий на текущую неделю
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<DateOnly, List<string>> GetEventsForWeek()
         {
-            DateTime date = DateTime.Now;
-            DateOnly weekStartDay = DateOnly.FromDateTime(date.AddDays(-(int)date.DayOfWeek));
+            DateTime date = DateTime.Now; //получение текущей даты
+            DateTime mondayDate = date.AddDays(-(int)date.DayOfWeek+1); //получение даты понедельника на текущей неделе (+1 нужен т.к. неделе здесь начинается в вск а мы считаем с понедельника
+            DateOnly weekStartDay = DateOnly.FromDateTime(mondayDate);
             Console.WriteLine(weekStartDay);
-            //  DateOnly weekEndDay = weekStartDay.AddDays(7);
+           
+            Dictionary<DateOnly, List<string>> weekEvents = new(); //пустой словарик для всех событий недели
 
-            /* switch(date.DayOfWeek)
-             {
-                 case DayOfWeek.Monday:
-                     weekStartDay = DateOnly.FromDateTime(date);
-                     weekEndDay = weekStartDay.AddDays(6);
-                     break;
-                 case DayOfWeek.Tuesday: 
-
-                     break;
-                 case DayOfWeek.Wednesday:
-
-                     break;
-                 case DayOfWeek.Thursday:
-
-                     break;
-                 case DayOfWeek.Friday:
-
-                     break;
-                 case DayOfWeek.Saturday:
-
-                     break;
-                 case DayOfWeek.Sunday:
-
-                     break;
-             }
-        */
-            // пн вт ср чт пт сб вс
-            Dictionary<DateOnly, List<string>> weekEvents = new();
-
-            for(int i = 0; i< 7; i++)
+            for(int i = 0; i< 7; i++) //7 итераций = кол-во дней в неделе
             {
-                if (!events.ContainsKey(weekStartDay))
-                    continue;
+                if (events.ContainsKey(weekStartDay)) //если в словаре есть нужная дата
+                    weekEvents[weekStartDay] = events[weekStartDay];//то список копируется в результирующий словарь
 
-                weekEvents[weekStartDay] = events[weekStartDay];
-
-                weekStartDay = weekStartDay.AddDays(1);
+                weekStartDay = weekStartDay.AddDays(1);//переход к следующему дню
             }
 
             return weekEvents;
         }
-
+        /// <summary>
+        /// вывод на консоль событий на текущую неделю
+        /// </summary>
         public void PrintEventsForWeek()
         {
             var weekEvents = GetEventsForWeek();
 
-            Console.WriteLine("-----------события на текущую неделю----------");
+            Console.WriteLine("-----------события на текущую неделю----------\n");
             
             foreach(KeyValuePair<DateOnly, List<string>> pair in weekEvents)
             {
-                Console.WriteLine($"события на {pair.Key}:");
+                Console.WriteLine($"\nсобытия на {pair.Key:D}:");
                 foreach(string str in pair.Value)
                 {
                     int n = 1;
