@@ -1,5 +1,8 @@
-﻿namespace Task_24_05
+﻿using System.Diagnostics;
+
+namespace Task_24_05
 {
+#pragma warning disable
     internal class Program
     {
         /*Объедините содержимое всех .txt файлов 
@@ -7,24 +10,47 @@
         */
         static void Main(string[] args)
         {
-            string path = "Parts";
-            File.Create(Path.Combine(path, "combined.txt")).Dispose();
+            // Получаем текущую директорию
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string partsDirectory = Path.Combine(currentDirectory, "Parts");
+            string outputFile = Path.Combine(currentDirectory, "combined.txt");
 
-            for( int i = 0; i< 10; i++)
+            // Проверяем существование подпапки Parts
+            if (!Directory.Exists(partsDirectory))
             {
-                string tempPath = Path.Combine(path, $"{i}file.txt");
-                File.Create(tempPath).Dispose();
-                File.WriteAllText(tempPath, new string(i, i+1))
+                Console.WriteLine("Папка 'Parts' не найдена в текущей директории.");
+                return;
             }
 
-            DirectoryInfo dir = new DirectoryInfo(path);
-            List<FileInfo> files = dir.GetFiles().ToList();
+            // Получаем все текстовые файлы в подпапке Parts
+            List<string> textFiles = Directory.GetFiles(partsDirectory, "*.txt").ToList();
 
-            foreach (FileInfo file in files) 
+            if (textFiles.Count == 0)
             {
-                if(file.Extension == "txt")
-                { }
+                Console.WriteLine("В папке 'Parts' не найдено текстовых файлов.");
+                return;
             }
+
+            // Объединяем содержимое файлов
+            using (StreamWriter writer = new StreamWriter(outputFile))
+            {
+                foreach (string file in textFiles)
+                {
+                    string content = File.ReadAllText(file);
+                    writer.WriteLine(content);
+                    writer.WriteLine(); // Добавляем пустую строку между файлами
+                }
+            }
+
+            // Удаляем исходные файлы
+            foreach (string file in textFiles)
+            {
+                File.Delete(file);
+            }
+
+            Console.WriteLine($"Объединение завершено. Результат сохранен в {outputFile}");
+            Console.WriteLine($"Удалено {textFiles.Count} исходных файлов.");
+            Process.Start("explorer.exe", currentDirectory);
         }
     }
 }
