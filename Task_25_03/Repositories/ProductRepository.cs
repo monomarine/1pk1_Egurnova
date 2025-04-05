@@ -75,5 +75,19 @@ namespace Task_25_03.Repositories
             //создать метод для удаления продукта (самостоятельно продумать как - по индексу, по названию...
         }
 
+        public static bool GetProductByName(string productName, out Product findedProduct) //поиск продукта в списке по названию
+        {
+            foreach (var product in products)
+            {
+                if (product.Name.Equals(productName, StringComparison.OrdinalIgnoreCase))//с игронирование регистра
+                {
+                    findedProduct = product;
+                    return true;
+                }
+            }
+            findedProduct = null;
+            return false;
+        }
+
     }
 }

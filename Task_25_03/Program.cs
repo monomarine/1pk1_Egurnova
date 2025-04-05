@@ -13,7 +13,7 @@ namespace Task_25_03
     класс Заказа(номер заказа, клиент, дата заказа, список товаров в заказе, метод для расчета стоимости всего заказа)
 
     сохраните в файл orders.json все заказы в системе
-    восставновите заказы в системе из файла
+    восстановите заказы в системе из файла
      */
     internal class Program
     {
@@ -23,6 +23,7 @@ namespace Task_25_03
 
             while (true)
             {
+                
                 Console.Clear();
 
                 Console.WriteLine
@@ -39,7 +40,7 @@ namespace Task_25_03
 
                 switch (mode)
                 {
-                    case Mode.Exit:
+                    case Mode.Exit: //выход из приложения
                         ProductRepository.SaveData(); //сохранение списка продуктов
                         OrdersRepository.SaveData();  //сохранение списка заказов
                         return;

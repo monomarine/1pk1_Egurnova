@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Task_25_03.Order">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAQ=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Products" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Task_25_03.Product">
+    <Position X="8.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task_25_03.Repositories.ProductRepository">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAYAgwAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Repositories\ProductRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task_25_03.Repositories.OrdersRepository">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAABAAASAAAAAAAAAAAQAAAAAAAAAAAAABABAAA=</HashCode>
+      <FileName>Repositories\OrdersRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="Task_25_03.Mode">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAYAwQAAAAAAAAIAAAAAABAAA=</HashCode>
+      <FileName>Mode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
