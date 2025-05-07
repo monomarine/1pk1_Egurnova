@@ -6,23 +6,30 @@
         xmlns:local="clr-namespace:Task_38_02"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
+        <!--в столбца заявлены 3 строки-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <!--и 3 столбца-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition  Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="0" Grid.Column="0"
-                 Name="allProductsListBox"/>
+        <!--список всех продуктов-->
+        <ListBox Grid.Row="1" Grid.Column="0"
+                 Name="allProductsListBox"
+                 Margin="10"/>
 
+        <!--кнопка для добавления продукта в корзину-->
         <Button Content=">" 
                 Name="addProductButton"
-                Grid.Row="0"
+                Click="addProductButton_Click"
+                Grid.Row="1"
                 Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -30,21 +37,36 @@
                 MinWidth="50"
                 FontSize="30"/>
 
+        <!--список корзины (выбранные товары)-->
         <ListBox x:Name="basketListBox"
-                 Grid.Row="0"
-                 Grid.Column="2"/>
+                 Grid.Row="1"
+                 Grid.Column="2"
+                 Margin="10"/>
 
-        <StackPanel Grid.Row="1"
+        <!--левая нидняя ячейка - в стеке переключатели с вариантами доставки-->
+        <StackPanel Grid.Row="2"
                     Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Margin="10,0,0,0">
+            
             <RadioButton Content="доставка (+300 р.)"
-                         FontSize="20"
-                         VerticalContentAlignment="Center"/>
+                         VerticalContentAlignment="Center"
+                         Name="deliveryOnCheckBox"/>
             <RadioButton Content="самовывоз"
-                         FontSize="20"
-                         VerticalContentAlignment="Center"/>
+                         VerticalContentAlignment="Center"
+                         Name="deliveryOffCheckBox"/>
         </StackPanel>
+
+        <!--правая нижняя ячейка - кнопка для расчета стоимости заказа-->
+        <Button Content="Оформить"
+                Name="takeOrderButton"
+                Click="takeOrderButton_Click"
+                Grid.Row="2"
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Padding="10"
+                Margin="0,0,10,0"/>
 
 
     </Grid>

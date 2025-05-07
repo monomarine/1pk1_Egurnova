@@ -8,27 +8,25 @@
         Title="MainWindow"  SizeToContent="WidthAndHeight">
 
     <StackPanel Margin="10">
-        <Label Content="Пройдите регистрацию перед началом работы"/>
-        <Separator Margin="5,0,5,15"/>
-        <Label Content="введите логин"
-               HorizontalAlignment="Center"/>
-        <TextBox x:Name="loginTextBox"
-                 Margin="5,0,5,0"/>
+        <Label Content="Пройдите регистрацию перед началом работы"/> <!--статичная текстова метка с надписью (не меняется во времяработы)-->
+        <Separator Margin="5,0,5,15"/> <!--разделите в виде линии с отступами 5 слева 0 сверху 5 справа и 15 снизу-->
+        <Label Content="введите логин" HorizontalAlignment="Center"/>
+        <!--тектовое поле для ввода логина-->
+        <TextBox x:Name="loginTextBox" Margin="5,0,5,0"/>
 
-        <Label Content="Введите пароль"
-               HorizontalAlignment="Center"
-               Margin="0,20,0,0"/>
+        <Label Content="Введите пароль" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+        <!--поле для ввода пароля-->
         <PasswordBox x:Name="passwordBox1"
                      Margin="5,0,5,0"/>
+        
+        <Label Content="Повторно введите пароль" HorizontalAlignment="Center"/>
+        <!--поле для повторного ввода пароля-->
+        <PasswordBox x:Name="passwordBox2" Margin="5,0,5,0"/>
 
-        <Label Content="Повторно введите пароль"
-                HorizontalAlignment="Center"/>
-        <PasswordBox x:Name="passwordBox2"
-                     Margin="5,0,5,0"/>
+        <!--кнопка при нажатии на котую вызывается метод regiztrationButton_Click-->
         <Button Content="Зарегестрироваться"
                 Margin="5,15,5,5"
                 Name="regiztrationButton"
-                Click="regiztrationButton_Click"
-                />
+                Click="regiztrationButton_Click"/>
     </StackPanel>
 </Window>
