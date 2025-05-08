@@ -20,7 +20,8 @@ namespace Task_38_02
             Price = price;
         }
         /// <summary>
-        /// переопредяем ToString для того чтобы в список выводилоась информация в нужном нам виде (и название и цена)
+        /// переопредяем ToString для того чтобы в список выводилоась 
+        /// информация в нужном нам виде (и название и цена)
         /// </summary>
         /// <returns></returns>
         public override string ToString()

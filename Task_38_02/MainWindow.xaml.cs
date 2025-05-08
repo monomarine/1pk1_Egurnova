@@ -36,14 +36,14 @@ namespace Task_38_02
         };
 
         private List<Product> basketProducts = new(); //список продуктов в корзине
-        private decimal totalPrice;
+
+        private decimal totalPrice = 0m;
         private decimal deliveryPrice = 300m;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            //связывание листбоксов с нужным списком в качестве источника данных
-            allProductsListBox.ItemsSource = products; 
+            allProductsListBox.ItemsSource = products;
             basketListBox.ItemsSource = basketProducts;
         }
 
@@ -53,32 +53,32 @@ namespace Task_38_02
             if (product != null)
             {
                 basketProducts.Add(product);
-                basketListBox.Items.Refresh();
+                basketListBox.Items.Refresh(); 
             }
         }
-
-        private decimal GetTotalPrice(ref List<Product> products)
+        private void takeOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            decimal totalPrice = 0;
-            foreach (var product in products)
+            CalculateTotalPrice();
+
+            //если был выбран вариант доставки
+            if (deliveryOnCheckBox.IsChecked == true)
+            {
+                //к сумме добавляется стоимость доставки
+                totalPrice += deliveryPrice;
+            }
+            
+            //вызов всплывающего окра с сообщением о доставке
+            MessageBox.Show($"сумма вашего заказа: \n" +
+                $"{totalPrice:F2}");
+        }
+
+        private void CalculateTotalPrice()
+        {
+            foreach (var product in basketProducts)
             {
                 totalPrice += product.Price;
             }
-            return totalPrice;  
-        }
-
-        private void takeOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (deliveryOnCheckBox.IsChecked == true)
-            {
-                totalPrice = GetTotalPrice(ref basketProducts) + deliveryPrice;
-            }
-            else
-                totalPrice = GetTotalPrice(ref basketProducts);
-
-            MessageBox.Show($"сумма вашего заказа: \n" +
-                $"{totalPrice:F2}");
-                
         }
     }
 }
+
