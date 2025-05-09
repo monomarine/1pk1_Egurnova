@@ -10,129 +10,120 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Task_38_03;
 
-/*
- * Создайте окно ввода информации о книге (название, автор, год издания, состояние – перечисление)
-При нажатии на кнопку «сохранить» данные о книге сохраняются во внутренний список связанный с ListBox
-при двойном клике по элементу списка - появляется всплывающее окно с информацией о книге
-При закрытии приложения данные сериализируются в файл
-при открытии приложения - данные восстанавливаются из файла сохранения
-*/
 namespace Lesson_38_03
 {
+#pragma warning disable
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Library library = new();
+        private Library _library = new();
         public MainWindow()
         {
             InitializeComponent();
             stateComboBox.SelectedIndex = 1;
-            booksListBox.ItemsSource = library.Books;
+            booksListBox.ItemsSource = _library.Books;
         }
 
-        private void addBookButton_Click(object sender, RoutedEventArgs e)
+        #region обработчики_Событий_WPF_элементов
+        private void addBookButton_Click(object sender, RoutedEventArgs e) //----------------------КНОПКА ДОБАВИТЬ
         {
-            if(!Validate(out string errorMessage))
+            if (!Validate(out string errorMessage)) //если данные не прошли валидацию
             {
-                MessageBox.Show(errorMessage);
-                return;
+                MessageBox.Show(errorMessage); //то показываем сообщение об ошибке(ах)
+                return; //завершаем метод
             }
 
-            //собираем объект книги
+            //если валидация пройдена, то собираем объект книги
             Book book = new Book(
                 titleTextBox.Text, //название из поля titleTextBox
-                authorTextBox.Text, //автор из поля 
-                Int32.Parse(yearTextBox.Text), // год издания из поля с преобразование в int
-                (BookState)stateComboBox.SelectedIndex //состояние - из выпадающего списка берется индекс выбранного элемента м преобразовывается к перечислению
+                authorTextBox.Text, //автор из поля authorTextBox
+                Int32.Parse(yearTextBox.Text), // год издания из поля yearTextBox с преобразование в int
+                (BookState)stateComboBox.SelectedIndex //состояние - из выпадающего списка берется индекс выбранного элемента
                 );
 
-            library.AddBook(book);
-            
+            _library.AddBook(book); //вызывается метод добавления книги в библиотеку
+
             booksListBox.Items.Refresh(); //обновление элементов ListBox чтобы отобразить все изменения
-            
             Clear();
         }
-
-        private void clearBookButton_Click(object sender, RoutedEventArgs e)
+        private void clearBookButton_Click(object sender, RoutedEventArgs e) //--------------------КНОПКА ОЧИСТИТЬ
         {
             Clear();
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e) //----------------------------ЗАГРУЗКА ОКНА
+        {
+            _library.Load();
+            booksListBox.ItemsSource = _library.Books;
+        }
+        private void Window_Closed(object sender, EventArgs e)  //---------------------------------ЗАКРЫТИЕ ОКНА
+        {
+            _library.Save();
+        }
+        private void deleteBookMenuItem_Click(object sender, RoutedEventArgs e) //-----------------КОНТЕКСТНОЕ МЕНЮ "УДАЛИТЬ"
+        {
+            //извлекаем выбранный элемент из ListBox
+            var item = booksListBox.SelectedItem;
 
-        private bool Validate(out string error)
+            //проверяем его на пустоту и является ли он по факту книгой
+            if (item != null && item is Book book)
+            {
+                _library.RemoveBook(book); //вызываем удаление книги из библиотеки
+                booksListBox.Items.Refresh(); //обновляем ListBox
+            }
+        }
+        private void showInfoMenuItem_Click(object sender, RoutedEventArgs e) //-------------------КОНТЕКСТНОЕ МЕНЮ "ПОДРОБНЕЕ"
+        {
+            ShowBookInfo();
+        }
+        private void booksListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e) //-------ДВОЙНОЙ КЛИК ПО ЭЛЕМЕНТУ СПИСКА
+        {
+            ShowBookInfo();
+        }
+        #endregion
+
+        #region вспомомагательные_методы
+        //метод-валидатор вводимых данных
+        private bool Validate(out string error) //-------------------------------------------------ВАЛИДАЦИЯ ВХОДНЫХ ДАННЫХ
         {
             error = "";
-            try
+            try //есть вероятность что в поле года будет текст, который не преобразовать к числу
             {
                 int year = Convert.ToInt32(yearTextBox.Text);
-                if (year < 1900 || year > DateTime.Now.Year)
+                if (year < 1900 || year > DateTime.Now.Year) //проверка года издания на корректный диапазон
                 {
-                    error += "год издания некорректен\n";
-                    return false;
+                    error += "год издания должен быть от 1900 до текцщего года\n";
                 }
             }
-            catch( FormatException ex)
+            catch (FormatException ex)
             {
                 error = "год издания - не число\n";
-                return false ;
             }
 
-            if (string.IsNullOrEmpty(titleTextBox.Text))
+            if (string.IsNullOrEmpty(titleTextBox.Text))  //проверка названия на пустые данные
             {
                 error += "Название пусто\n";
-                return false;
             }
-            else if(string.IsNullOrEmpty(authorTextBox.Text))
+            if (string.IsNullOrEmpty(authorTextBox.Text)) //проверка автора на пустые данные
             {
                 error += "поле автора пусто\n";
-                return false;   
             }
-            
+
+            if (error.Length > 0) 
+            {
+                return false;
+            }
             return true;
         }
-
-        private void Clear()
+        private void Clear()    //-----------------------------------------------------------------ОЧИСТКА ПОЛЕЙ ВВОДА
         {
             titleTextBox.Clear();
             authorTextBox.Clear();
             yearTextBox.Clear();
             stateComboBox.SelectedIndex = 1;
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            library.Load();
-            booksListBox.ItemsSource = library.Books;
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            library.Save();
-        }
-
-        private void booksListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ShowBookInfo();
-        }
-
-        private void deleteBookMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            var item = booksListBox.SelectedItem;
-
-            if (item != null && item is Book book)
-            {
-                library.RemoveBook(book);
-                booksListBox.Items.Refresh();
-            }
-        }
-
-        private void showInfoMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            ShowBookInfo();
-        }
-
-        private void ShowBookInfo()
+        private void ShowBookInfo() //-------------------------------------------------------------ВСПЛЫВАЮЩЕЕ ОКНО С ИНФОРМАЦИЕЙ ПО ВЫБРАННОЙ КНИГЕ
         {
             var item = booksListBox.SelectedItem;
             if (item != null && item is Book book)
@@ -143,5 +134,12 @@ namespace Lesson_38_03
                     $"состояние - {book.StringState()}");
             }
         }
+        #endregion
+
+
+
+
+
+
     }
 }

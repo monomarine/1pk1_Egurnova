@@ -6,13 +6,11 @@
         xmlns:local="clr-namespace:Lesson_38_03"
         mc:Ignorable="d"
         Title="Учет книг" Height="400" Width="800"
-        ResizeMode="NoResize"
-        Loaded="Window_Loaded" 
+        Loaded="Window_Loaded"
         Closed="Window_Closed">
     
     <UniformGrid Columns="2" Margin="10">
-        <!--левая часть - ввод информации о новой книге-->
-        <Grid Margin="5" >
+        <Grid Background="LightGray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -23,9 +21,9 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <!-- подписи полей для ввода -->
             <Label Content="Название"
                 Grid.Row="0" 
@@ -77,7 +75,7 @@
                 <ComboBoxItem Content="Плохое"/>
             </ComboBox>
 
-            <!-- кнопка для добавления книги в список -->
+            <!-- UniformGrid с кнопками -->
             <UniformGrid Columns="2"
                 Grid.Row="4" 
                 Grid.Column="1">
@@ -96,8 +94,7 @@
                     IsCancel="True"
                     Click="clearBookButton_Click"/>
             </UniformGrid>
-            
- 
+
             <!-- фоновое изображение -->
             <Image Source="/Images/book.png" 
                 Grid.Row="5" 
@@ -106,12 +103,12 @@
                 MaxHeight="100"
                 MaxWidth="100" 
                 Opacity="0.4"/>
-            
+
         </Grid>
         
-        <!--правая часть - список уже внесенных книг-->
-        <ListBox Name="booksListBox"
-            Margin="5" MouseDoubleClick="booksListBox_MouseDoubleClick">
+        <ListBox x:Name="booksListBox"
+                 Background="Azure"
+                 MouseDoubleClick="booksListBox_MouseDoubleClick">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Удалить" Name="deleteBookMenuItem"
@@ -121,7 +118,7 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-
-
     </UniformGrid>
 </Window>
+
+    
