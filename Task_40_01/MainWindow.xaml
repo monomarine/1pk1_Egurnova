@@ -1,0 +1,50 @@
+﻿<Window x:Class="Task_40_01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task_40_01"
+        mc:Ignorable="d"
+        Title="Заметки" Height="400" Width="300"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ListBox Name="NotesListBox"
+                 MouseDoubleClick="MainListBox_MouseDoubleClick"
+                 KeyDown="MainListBox_KeyDown"
+                 Grid.Row="0">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="удалить"
+                              Name="DeleteNoteMenuItem"
+                              Click="DeleteNoteMenuItem_Click"/>
+                    <MenuItem Header="изменить"
+                              Name="EditNoteMenuItem"
+                              Click="EditNoteMenuItem_Click"/>
+                    <MenuItem Header="экпорт в txt"
+                              Name="ExportToTXTMenuItem"
+                              Click="ExportToTXTMenuItem_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <Button x:Name="AddNoteButton"
+                Click="AddNoteButton_Click"
+                Grid.Row="1"
+                MaxHeight="30"
+                MaxWidth="30"
+                IsDefault="True"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Right">
+            <Image Source="/Icons/add-button.png"/>
+        </Button>
+
+    </Grid>
+</Window>
